@@ -19,14 +19,10 @@ RUN apk update \
         openssh \
         mysql \
     && \
-    apk add --no-cache  \
-         sqlite \     
-    && \
     # Install PHP extensions
     docker-php-ext-install \
         pdo_mysql \
         pdo_pgsql \
-        pdo_sqlite \
     && \
     # Install Composer
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
