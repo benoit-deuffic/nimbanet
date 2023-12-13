@@ -3,7 +3,9 @@ FROM composer:latest as composer
 FROM bdeuffic/alpine-php8-dev-base
 
 # Install packages
-RUN apk update \
+RUN apk update \ 
+    && \  
+    apk upgrade \
     && \
     # apt Debian packages
     apk add \
@@ -17,10 +19,14 @@ RUN apk update \
         openssh \
         mysql \
     && \
+    apk add --no-cache  \
+         sqlite \     
+    && \
     # Install PHP extensions
     docker-php-ext-install \
         pdo_mysql \
         pdo_pgsql \
+        pdo_sqlite \
     && \
     # Install Composer
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
